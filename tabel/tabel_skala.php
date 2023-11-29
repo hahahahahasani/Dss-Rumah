@@ -51,6 +51,7 @@ $query1 = mysqli_query($conn, "SELECT * FROM skala");
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_kriteria.php">Tabel Kriteria</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_bobot.php">Tabel Bobot</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_skala.php">Tabel Skala</a></li>
+                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Matrix Keputusan</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">

@@ -1,15 +1,9 @@
-<?php 
-include "../kontrol/config.php";
-
-$query1 = mysqli_query($conn, "SELECT * FROM kriteria");
-?>
-
 <!doctype html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DSS Rumah</title>
+    <title>DSS-Rumah</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,7 +17,6 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -41,10 +34,10 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="../index.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">Menu</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_alternatif.php">Tabel Alternatif</a></li>
@@ -54,11 +47,11 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Skala</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_alternatif.php">Form Alternatif</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_kriteria.php">Form Kriteria</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -103,7 +96,7 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Tabel Kriteria</h1>
+                                <h1>Alternatif</h1>
                             </div>
                         </div>
                     </div>
@@ -111,9 +104,9 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Kriteria</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Data table</li>
+                                    <li><a href="#">Alternatif</a></li>
+                                    <li><a href="#">Forms</a></li>
+                                    <li class="active">Basic</li>
                                 </ol>
                             </div>
                         </div>
@@ -125,53 +118,40 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-
-                    <div class="col-md-12">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Data Table</strong>
+                                <strong>Form Alternatif</strong>
                             </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>ID Kriteria</th>
-                                            <th>Nama Kriteria</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php while ($kriteria = mysqli_fetch_assoc($query1)) : ?>
-                                        <tr>
-                                            <td><?= $kriteria['id_kriteria'] ?></td>
-                                            <td><?= $kriteria['nm_kriteria'] ?></td>
-                                        </tr>
-                                        <?php endwhile ?>
-                                    </tbody>
-                                </table>
+                            <div class="card-body card-block">
+                                <form action="../kontrol/aksi_alternatif.php" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Alternatif</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="nm_alternatif" placeholder="Nama Alternatif" class="form-control"></div>
+                                    </div>
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3"><label for="select" class=" form-control-label">Select</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <select name="select" id="select" class="form-control">
+                                                <option value="0">Please select</option>
+                                                <option value="1">Option #1</option>
+                                                <option value="2">Option #2</option>
+                                                <option value="3">Option #3</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-actions form-group"><button type="submit" name="submit" class="btn btn-primary btn-sm">Submit</button></div>
+                                </form>
                             </div>
                         </div>
                     </div>
-
-
+                    <div class="col-lg-3"></div>
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
 
-
         <div class="clearfix"></div>
-
-        <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        Copyright &copy; 2018 Ela Admin
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        Designed by <a href="https://colorlib.com">Colorlib</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
     </div><!-- /#right-panel -->
 
@@ -183,25 +163,6 @@ $query1 = mysqli_query($conn, "SELECT * FROM kriteria");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="../assets/js/main.js"></script>
-
-
-    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="../assets/js/init/datatables-init.js"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#bootstrap-data-table-export').DataTable();
-        });
-    </script>
 
 
 </body>
