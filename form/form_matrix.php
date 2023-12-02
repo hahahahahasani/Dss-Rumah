@@ -1,7 +1,5 @@
 <?php
-include "../kontrol/config.php";
-
-$query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bobot a INNER JOIN kriteria b ON a.id_kriteria = b.id_kriteria");
+include("../kontrol/config.php");
 ?>
 
 <!doctype html>
@@ -9,7 +7,7 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DSS Rumah</title>
+    <title>DSS-Rumah</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,7 +21,6 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -41,10 +38,10 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="../index.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">Menu</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_alternatif.php">Tabel Alternatif</a></li>
@@ -55,7 +52,7 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_topsis.php">Metode Topsis</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_alternatif.php">Form Alternatif</a></li>
@@ -107,7 +104,7 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Tabel Bobot</h1>
+                                <h1>Matrix Keputusan</h1>
                             </div>
                         </div>
                     </div>
@@ -115,9 +112,9 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Bobot</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Data table</li>
+                                    <li><a href="#">Matrix Keputusan</a></li>
+                                    <li><a href="#">Forms</a></li>
+                                    <li class="active">Basic</li>
                                 </ol>
                             </div>
                         </div>
@@ -129,55 +126,69 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-
-                    <div class="col-md-12">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Data Table</strong>
+                                <strong>Form Matrix Keputusan</strong>
                             </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>ID Bobot</th>
-                                            <th>Kriteria</th>
-                                            <th>Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php while ($bobot = mysqli_fetch_assoc($query1)) : ?>
-                                            <tr>
-                                                <td><?= $bobot['id_bobot'] ?></td>
-                                                <td><?= $bobot['nm_kriteria'] ?></td>
-                                                <td><?= $bobot['value'] ?></td>
-                                            </tr>
-                                        <?php endwhile ?>
-                                    </tbody>
-                                </table>
+                            <div class="card-body card-block">
+                                <form action="../kontrol/aksi_matrix.php" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="select" class=" form-control-label">Alternatif</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <select name="alternatif" id="select" required>
+                                                <option>Please select</option>
+                                                <?php $alternatif = mysqli_query($conn, "SELECT * FROM alternatif"); ?>
+                                                <?php while ($data = mysqli_fetch_array($alternatif)) : ?>
+                                                    <option value="<?= $data['id_alternatif'] ?>"><?= $data['nm_alternatif'] ?></option>
+                                                <?php endwhile ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    $bobot = mysqli_query($conn, 'SELECT a.id_bobot, b.nm_kriteria, c.id_skala, c.keterangan 
+                                FROM bobot a
+                                JOIN kriteria b ON a.id_kriteria = b.id_kriteria
+                                JOIN skala c ON b.id_kriteria = c.id_kriteria');
+                                    $dataSkala = array();
+                                    while ($data1 = mysqli_fetch_assoc($bobot)) {
+                                        $idBobot = $data1['id_bobot'];
+                                        if (!isset($dataSkala[$idBobot])) {
+                                            $dataSkala[$idBobot] = array('nm_kriteria' => $data1['nm_kriteria'], 'keterangan' => array());
+                                        }
+                                        $dataSkala[$idBobot]['keterangan'][] = $data1['keterangan'];
+                                    }
+                                    foreach ($dataSkala as $idBobot => $data) {
+                                    ?>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class="form-control-label"><?= $data['nm_kriteria'] ?></label></div>
+                                            <div class="col col-md-9">
+                                                <select name="skala[]" id="select" required>
+                                                    <option>Please select</option>
+                                                    <?php
+                                                    foreach ($data['keterangan'] as $keterangan) {
+                                                        echo "<option value='$keterangan'>$keterangan</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="col"><input type="hidden" id="text-input" name="bobot[]" placeholder="Value" class="form-control" value="<?= $idBobot ?>"></div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="form-actions form-group"><button type="submit" name="submit" class="btn btn-primary btn-sm">Submit</button></div>
+                                </form>
                             </div>
                         </div>
                     </div>
-
-
+                    <div class="col-lg-3"></div>
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
 
-
         <div class="clearfix"></div>
-
-        <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        Copyright &copy; 2018 Ela Admin
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        Designed by <a href="https://colorlib.com">Colorlib</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
     </div><!-- /#right-panel -->
 
@@ -189,25 +200,6 @@ $query1 = mysqli_query($conn, "SELECT a.id_bobot, b.nm_kriteria, a.value FROM bo
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="../assets/js/main.js"></script>
-
-
-    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="../assets/js/init/datatables-init.js"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#bootstrap-data-table-export').DataTable();
-        });
-    </script>
 
 
 </body>

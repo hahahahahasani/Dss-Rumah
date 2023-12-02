@@ -1,3 +1,7 @@
+<?php
+include("../kontrol/config.php");
+?>
+
 <!doctype html>
 
 <head>
@@ -44,7 +48,8 @@
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_kriteria.php">Tabel Kriteria</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_bobot.php">Tabel Bobot</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_skala.php">Tabel Skala</a></li>
-                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Skala</a></li>
+                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Matrix Keputusan</a></li>
+                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_topsis.php">Metode Topsis</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children active dropdown">
@@ -53,6 +58,8 @@
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_alternatif.php">Form Alternatif</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_kriteria.php">Form Kriteria</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_skala.php">Form Skala</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_bobot.php">Form Bobot</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_matrix.php">Form Matriks Keputusan</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -97,7 +104,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Kriteria</h1>
+                                <h1>Skala</h1>
                             </div>
                         </div>
                     </div>
@@ -105,7 +112,7 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Kriteria</a></li>
+                                    <li><a href="#">Skala</a></li>
                                     <li><a href="#">Forms</a></li>
                                     <li class="active">Basic</li>
                                 </ol>
@@ -127,6 +134,18 @@
                             </div>
                             <div class="card-body card-block">
                                 <form action="../kontrol/aksi_skala.php" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="select" class=" form-control-label">Select</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <select name="kriteria" id="select" required>
+                                                <option>Please select</option>
+                                                <?php $kriteria = mysqli_query($conn, "SELECT * FROM kriteria"); ?>
+                                                <?php while ($data = mysqli_fetch_array($kriteria)) : ?>
+                                                    <option value="<?= $data['id_kriteria'] ?>"><?= $data['nm_kriteria'] ?></option>
+                                                <?php endwhile ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Value</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="text-input" name="value" placeholder="Value" class="form-control"></div>

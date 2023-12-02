@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../kontrol/config.php";
 
 $query1 = mysqli_query($conn, "SELECT * FROM alternatif");
@@ -52,13 +52,17 @@ $query1 = mysqli_query($conn, "SELECT * FROM alternatif");
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_bobot.php">Tabel Bobot</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_skala.php">Tabel Skala</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Matrix Keputusan</a></li>
+                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_topsis.php">Metode Topsis</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_alternatif.php">Form Alternatif</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_kriteria.php">Form Kriteria</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_skala.php">Form Skala</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_bobot.php">Form Bobot</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_matrix.php">Form Matriks Keputusan</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -141,10 +145,10 @@ $query1 = mysqli_query($conn, "SELECT * FROM alternatif");
                                     </thead>
                                     <tbody>
                                         <?php while ($alternatif = mysqli_fetch_assoc($query1)) : ?>
-                                        <tr>
-                                            <td><?= $alternatif['id_alternatif'] ?></td>
-                                            <td><?= $alternatif['nm_alternatif'] ?></td>
-                                        </tr>
+                                            <tr>
+                                                <td><?= $alternatif['id_alternatif'] ?></td>
+                                                <td><?= $alternatif['nm_alternatif'] ?></td>
+                                            </tr>
                                         <?php endwhile ?>
                                     </tbody>
                                 </table>

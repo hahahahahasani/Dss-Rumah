@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("../kontrol/config.php");
 ?>
 
@@ -48,7 +48,8 @@ include("../kontrol/config.php");
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_kriteria.php">Tabel Kriteria</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_bobot.php">Tabel Bobot</a></li>
                             <li><i class="fa fa-table"></i><a href="../tabel/tabel_skala.php">Tabel Skala</a></li>
-                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Skala</a></li>
+                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_matrix_keputusan.php">Tabel Matrix Keputusan</a></li>
+                            <li><i class="fa fa-table"></i><a href="../tabel/tabel_topsis.php">Metode Topsis</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children active dropdown">
@@ -58,6 +59,7 @@ include("../kontrol/config.php");
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_kriteria.php">Form Kriteria</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_skala.php">Form Skala</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="../form/form_bobot.php">Form Bobot</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="../form/form_matrix.php">Form Matriks Keputusan</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -102,7 +104,7 @@ include("../kontrol/config.php");
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Skala</h1>
+                                <h1>Bobot</h1>
                             </div>
                         </div>
                     </div>
@@ -110,7 +112,7 @@ include("../kontrol/config.php");
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Skala</a></li>
+                                    <li><a href="#">Bobot</a></li>
                                     <li><a href="#">Forms</a></li>
                                     <li class="active">Basic</li>
                                 </ol>
@@ -128,7 +130,7 @@ include("../kontrol/config.php");
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <strong>Form Skala</strong>
+                                <strong>Form Bobot</strong>
                             </div>
                             <div class="card-body card-block">
                                 <form action="../kontrol/aksi_bobot.php" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -139,7 +141,7 @@ include("../kontrol/config.php");
                                                 <option>Please select</option>
                                                 <?php $kriteria = mysqli_query($conn, "SELECT * FROM kriteria"); ?>
                                                 <?php while ($data = mysqli_fetch_array($kriteria)) : ?>
-                                                <option value="<?= $data['id_kriteria'] ?>"><?= $data['nm_kriteria'] ?></option>
+                                                    <option value="<?= $data['id_kriteria'] ?>"><?= $data['nm_kriteria'] ?></option>
                                                 <?php endwhile ?>
                                             </select>
                                         </div>
